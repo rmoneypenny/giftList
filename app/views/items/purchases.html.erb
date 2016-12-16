@@ -1,0 +1,34 @@
+<%= current_user.id %>
+<br>
+<br>
+<%= form_tag mypurchases_path do %>
+<table>
+	<th> Name </th>
+	<th> Item </th>
+	<th> Price </th>
+	<th> Link </th>
+	<th> Purchase </th>
+	<% @item.each do |i| %>
+		<tr>
+			<td> <%= (User.find_by id: (Item.find_by id: i).user_id).name %> </td>
+			<td> <%= (Item.find_by id: i).item_name %> </td>
+			<td> <%= "$" + (Item.find_by id: i).price.to_s %> </td>
+			<td> <%= (Item.find_by id: i).link %> </td>
+			<td> 
+				<%= radio_button_tag :purchase, [i, current_user.id, "Full"] %> 
+				<%= label_tag :purchase, "Full" %>
+				<%= text_field_tag :f_amount, @purchase.amountDifference(i), readonly: true%>
+				<%= radio_button_tag :purchase, [i, current_user.id, "Partial"] %>
+				<%= label_tag :purchase, "Partial" %>
+				<%= text_field_tag :p_amount, nil %>
+			</td>
+		</tr>
+
+	<% end %>
+
+</table>
+<%= submit_tag "Purchase" %>
+<% end %>
+<br>
+<br>
+<%= link_to "Back", others_path %>

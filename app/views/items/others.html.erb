@@ -1,0 +1,26 @@
+
+<%= form_tag purchases_path do %>
+<table>
+	<tr>
+		<th> </th>
+		<th> Name </th>
+		<th> Item </th> 
+		<th> Price </th> 
+		<th> Link </th>
+		<th> Remaining </th>
+		<th> Purchased? </th>
+	</tr>
+	<% @items.othersList(current_user.id).each do |i| %>
+		<tr>
+			<td> <%= check_box_tag "items[]", i[3]%> </td>
+			<td> <%= (User.find_by id: i[4]).name %> </td>
+			<td> <%= i[0] %> </td>
+			<td> <%= i[1] %> </td>
+			<td> <%= i[2] %> </td>				
+			<td> <%= @purchase.status(i[3])[0] %> </td>
+			<td> <%= @purchase.status(i[3])[1] %> </td>
+		</tr>
+	<% end %>
+</table>
+<%= submit_tag "Purchase" %>
+<% end %>

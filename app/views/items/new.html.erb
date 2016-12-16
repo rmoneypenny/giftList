@@ -1,0 +1,20 @@
+
+<P> Enter Item </p>
+<br>
+<%= form_tag new_path do %>
+	<%= label_tag("Itemname") %>
+	<%= text_field_tag "item_name" %>
+	<br>
+	<%= label_tag "Price" %>
+	<%= number_field_tag(:price, nil, :step => 0.01) %>
+	<br>
+	<%= label_tag "Link" %>
+	<%= url_field_tag :link %>
+	<br>
+	<%= hidden_field_tag(:user_id, current_user.id) %>
+	<br>
+	<%= submit_tag "Add" %>
+<% end %>
+<br>
+<br>
+<%= link_to "Back", mylist_path %>

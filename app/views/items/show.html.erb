@@ -1,0 +1,40 @@
+
+
+
+<br>
+<table>
+	<tr>
+		<th> Item Name </th>
+		<th> Price </th>
+		<th> Link </th>
+	</tr>
+	<% @item.userList(current_user.id).each do |i| %>
+		<tr>
+			<td>
+				<%= i[0] %>
+			</td>
+			<td>
+				<%= "$" + i[1].to_s %>
+			</td>
+			<td>
+				<%= i[2] %>
+			</td>
+			<td>
+				<%= link_to "edit", edit_path(:item_id => i[3]) %>
+			</td>
+			<td>
+				<% if i[3].to_s == @id%>
+					<%= button_to "Yes", mylist_path(:item_id => i[3]), :method => :delete %>
+					<%= button_to "No", mylist_path %>
+				<% else %>
+					<%= link_to "delete", mylist_path(:item_id => i[3], :delete => "true") %>
+				<% end %>
+			</td>
+			
+		</tr>
+	<% end %>
+</table>
+<br>
+<br>
+<%= link_to "Add", new_path %>
+
