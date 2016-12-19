@@ -7,4 +7,10 @@ class PurchasesController < ApplicationController
 		redirect_to mypurchases_path
 	end
 
+	def destroy
+		p = Purchase.where(:id => params[:purchase]).first
+		p.destroy
+		redirect_to mypurchases_path
+	end
+
 end

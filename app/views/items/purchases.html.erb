@@ -1,7 +1,7 @@
-<%= current_user.id %>
-<br>
-<br>
 <%= form_tag mypurchases_path do %>
+<br>
+<br>
+<br>
 <table>
 	<th> Name </th>
 	<th> Item </th>
@@ -13,7 +13,7 @@
 			<td> <%= (User.find_by id: (Item.find_by id: i).user_id).name %> </td>
 			<td> <%= (Item.find_by id: i).item_name %> </td>
 			<td> <%= "$" + (Item.find_by id: i).price.to_s %> </td>
-			<td> <%= (Item.find_by id: i).link %> </td>
+			<td> <%= link_to (Item.find_by id: i).link, (Item.find_by id: i).link, :target => '_blank' %> </td>
 			<td> 
 				<%= radio_button_tag :purchase, [i, current_user.id, "Full"] %> 
 				<%= label_tag :purchase, "Full" %>
@@ -21,14 +21,33 @@
 				<%= radio_button_tag :purchase, [i, current_user.id, "Partial"] %>
 				<%= label_tag :purchase, "Partial" %>
 				<%= text_field_tag :p_amount, nil %>
+				<%= submit_tag "Purchase" %>
+
 			</td>
 		</tr>
 
 	<% end %>
 
 </table>
-<%= submit_tag "Purchase" %>
 <% end %>
+<p>
+	Contributors
+</p>
+<table>
+	<th> Name </th>
+	<th> Amount </th>
+	<% @contribute.each do |c| %>
+		<tr>
+			<td> <%= (User.where(:id => c.user_id).first).name %> </td>
+			<td> <%=  number_to_currency(c.amount) %> </td>
+		</tr>
+	<% end %>
+</table>
+
+
+<br>
+<br>
+
 <br>
 <br>
 <%= link_to "Back", others_path %>

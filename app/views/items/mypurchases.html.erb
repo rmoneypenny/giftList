@@ -1,3 +1,32 @@
-<p>
-	HI
-</p>
+<br>
+<br>
+<%= form_tag(mypurchases_path, method: "delete") do %>
+<table>
+	<th> </th>
+	<th> Name </th>
+	<th> Item </th>
+	<th> Link </th>
+	<th> Amount </th>
+	<th> Remaining </th>
+	<% @purchases.each do |p| %>
+		<tr>
+			<td> <%= radio_button_tag "purchase", p.id %> </td>
+			<td> <%= (User.where(:id => p.user_id).first).name %> </td>
+			<td> <%= (Item.where(:id => p.item_id).first).item_name %> </td>
+			<td>
+				<%= link_to (Item.where(:id => p.item_id).first).link, (Item.where(:id => p.item_id).first).link, :target => '_blank' %> 
+			</td>
+			<td> 
+				<% Purchase.where(:item_id => p.item_id).each do |i| %> 
+					<%=  "(" + number_to_currency(i.amount) + ") " %>
+					<%= ((User.where(:id => i.user_id).first).name) == current_user.name ? "You" : (User.where(:id => i.user_id).first).name %>
+					<br>
+				<% end %>
+			</td>
+			<td> <%= number_to_currency(p.amountDifference(p.item_id)) %> </td>
+		</tr>
+	<% end %>
+<% end %>
+</table>
+<br>
+<%= submit_tag "Delete", data: {confirm: "Are you sure?"} %>

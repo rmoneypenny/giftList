@@ -17,6 +17,7 @@ get "/purchases" => "items#purchases"
 post "/purchases" => "items#purchases"
 get "/mypurchases" => "items#mypurchases"
 post "/mypurchases" => "purchases#create"
+delete "/mypurchases" => "purchases#destroy"
 
 resources :users
 

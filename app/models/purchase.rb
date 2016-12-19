@@ -4,7 +4,7 @@ class Purchase < ApplicationRecord
 		if Purchase.exists?(:item_id => item_id)
 			difference = self.amountDifference(item_id)
 			if difference == 0
-				["$" + Item.where(:id => item_id).first.price.to_s, "Yes"]
+				["$0", "Yes"]
 			else
 				["$" + difference.round(2).to_s, "Partial"]
 			end

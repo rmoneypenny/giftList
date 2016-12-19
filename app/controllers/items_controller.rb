@@ -40,6 +40,11 @@ class ItemsController < ApplicationController
 	def purchases
 		@item = params[:items]
 		@purchase = Purchase.new
+		@contribute = Purchase.where(:item_id => params[:items])
+	end
+
+	def mypurchases
+		@purchases = Purchase.where(:user_id => current_user.id)
 	end
 
   private
