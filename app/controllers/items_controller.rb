@@ -11,7 +11,8 @@ class ItemsController < ApplicationController
 		@item = Item.new(item_params)
 		@item.save
 		puts @item.id
-		redirect_to mylist_path
+		flash[:notice] = "Item Added"
+		redirect_to new_path
 	end
 
 	def edit
@@ -26,8 +27,8 @@ class ItemsController < ApplicationController
 	end
 
 	def destroy
-		@item = Item.find(params[:item_id])
-		@item.destroy
+		Item.update(params[:item_id], :deleted => true)
+		Purchase.where(:item_id => params[:item_id]).update_all(:deleted => true)
 		redirect_to mylist_path
 	end
 
@@ -44,12 +45,13 @@ class ItemsController < ApplicationController
 	end
 
 	def mypurchases
-		@purchases = Purchase.where(:user_id => current_user.id)
+		@purchases = Purchase.where(:user_id => current_user.id, :deleted => false)
+		@deleted = Purchase.where(:user_id => current_user.id, :deleted => true)
 	end
 
   private
   	def item_params
-  		params.permit(:item_name, :price, :link, :user_id)
+  		params.permit(:item_name, :price, :link, :user_id, :deleted)
   	end
 
 end

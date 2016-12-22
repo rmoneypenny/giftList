@@ -1,5 +1,7 @@
 class Purchase < ApplicationRecord
 
+	belongs_to :item
+
 	def status(item_id)
 		if Purchase.exists?(:item_id => item_id)
 			difference = self.amountDifference(item_id)
@@ -18,10 +20,10 @@ class Purchase < ApplicationRecord
 		p = purchase.split(" ")
 		difference = self.amountDifference(p[0])
 		if p[2] == "Full"
-			a = Purchase.create(:item_id => p[0], :user_id => p[1],:amount => difference)
+			a = Purchase.create(:item_id => p[0], :user_id => p[1],:amount => difference, :deleted => false)
 			a.save
 		elsif p[2] == "Partial" && difference >= p_amount.to_f
-			a = Purchase.create(:item_id => p[0], :user_id => p[1], :amount => p_amount)
+			a = Purchase.create(:item_id => p[0], :user_id => p[1], :amount => p_amount, :deleted => false)
 			a.save
 		end
 

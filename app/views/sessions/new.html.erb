@@ -1,8 +1,12 @@
-<h1>Log In</h1>
-
-<% if current_user %>
-	<%=current_user.name %>
+<br>
+<% if flash[:alert] %>
+	<div id = "error"> <%= flash[:alert] %> </div>
+<% elsif flash[:logout] %>
+	<div id = "message"> <%= flash[:logout] %> </div>
 <% end %>
+
+
+<h1>Log In</h1>
 
 <%=form_tag log_in_path do%>
 <%=label_tag :email %>

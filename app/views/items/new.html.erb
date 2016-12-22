@@ -1,4 +1,9 @@
+<br>
+<% if flash[:notice] %>
+	<div id = "message"> <%= flash[:notice] %> </div>
+<% end %>
 
+<div id = "content">
 <P> Enter Item </p>
 <br>
 <%= form_tag new_path do %>
@@ -13,8 +18,11 @@
 	<br>
 	<%= hidden_field_tag(:user_id, current_user.id) %>
 	<br>
+	<%= hidden_field_tag(:deleted, false) %>
+	<br>
 	<%= submit_tag "Add" %>
 <% end %>
 <br>
 <br>
 <%= link_to "Back", mylist_path %>
+</div>

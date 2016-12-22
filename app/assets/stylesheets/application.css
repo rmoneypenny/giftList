@@ -13,3 +13,26 @@
  *= require_tree .
  *= require_self
  */
+body {
+   font-family: Helvetica, Geneva, Arial, sans-serif;
+   font-size: small;
+   font-color: #000;
+   background-color: #fff;
+}
+
+div#content {
+   float: left;
+   width: 450px;
+   padding: 10px;
+}
+
+div#error {
+	font-family: Helvetica, Geneva, Arial, sans-serif;
+	font-size: medium;
+	color: #ff0000;
+}
+div#message {
+	font-family: Helvetica, Geneva, Arial, sans-serif;
+	font-size: medium;
+	color: #0c8710;
+}

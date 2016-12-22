@@ -1,5 +1,7 @@
 <br>
 <br>
+<% if !@purchases.first.blank? %>
+
 <%= form_tag(mypurchases_path, method: "delete") do %>
 <table>
 	<th> </th>
@@ -11,7 +13,7 @@
 	<% @purchases.each do |p| %>
 		<tr>
 			<td> <%= radio_button_tag "purchase", p.id %> </td>
-			<td> <%= (User.where(:id => p.user_id).first).name %> </td>
+			<td> <%= (User.where(:id => (Item.where(:id => p.item_id).first).user_id).first).name %> </td>
 			<td> <%= (Item.where(:id => p.item_id).first).item_name %> </td>
 			<td>
 				<%= link_to (Item.where(:id => p.item_id).first).link, (Item.where(:id => p.item_id).first).link, :target => '_blank' %> 
@@ -26,7 +28,29 @@
 			<td> <%= number_to_currency(p.amountDifference(p.item_id)) %> </td>
 		</tr>
 	<% end %>
-<% end %>
 </table>
 <br>
+<br>
+<% if !@deleted.first.blank? %>
+	<%=  %>
+	<%= "These are items that you have purchased but have since been deleted by the owner" %>
+	<table>
+		<th> </th>
+		<th> Name </th>
+		<th> Item Name </th>
+		<th> Amount </th>
+			<% @deleted.each do |d| %>
+				<tr>
+					<td> <%= radio_button_tag "purchase", d.id %> </td>
+					<td> <%= (User.where(:id => (Item.where(:id => d.item_id).first).user_id).first).name %> </td>
+					<td> <%= (Item.where(:id => d.item_id).first).item_name %> </td>
+					<td> <%= number_to_currency(d.amount) %></td>
+				<tr>
+			<% end %>
+
+	</table>
+<br>
+<% end %>
 <%= submit_tag "Delete", data: {confirm: "Are you sure?"} %>
+<% end %>
+<% end %>
