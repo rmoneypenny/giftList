@@ -17,7 +17,7 @@
 				<%= number_to_currency(i[1]) %>
 			</td>
 			<td>
-				<%= i[2] %>
+				<%= link_to i[2], i[2], :target => '_blank' %>
 			</td>
 			<td>
 				<%= link_to "edit", edit_path(:item_id => i[3]) %>
