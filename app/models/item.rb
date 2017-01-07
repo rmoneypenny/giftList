@@ -7,10 +7,8 @@ class Item < ApplicationRecord
 			items = Item.where(:id => item_id, :deleted => false)
 		end
 		s = []
-		if !items.empty?
-			items.each do |i|
+		items.each do |i|
 				s.push([i.item_name, i.price, i.link, i.id, i.user_id])
-			end
 		end
 		s
 	end
