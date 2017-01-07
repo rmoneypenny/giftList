@@ -8,8 +8,11 @@ class Item < ApplicationRecord
 		end
 		s = []
 		items.each do |i|
+			puts "before loop"
 			s.push([i.item_name, i.price, i.link, i.id, i.user_id])
+			puts "after loop"
 		end
+		puts "empty"
 		s
 	end
 
