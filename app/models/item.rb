@@ -7,12 +7,11 @@ class Item < ApplicationRecord
 			items = Item.where(:id => item_id, :deleted => false)
 		end
 		s = []
-		items.each do |i|
-			puts "before loop"
-			s.push([i.item_name, i.price, i.link, i.id, i.user_id])
-			puts "after loop"
+		if !items.empty?
+			items.each do |i|
+				s.push([i.item_name, i.price, i.link, i.id, i.user_id])
+			end
 		end
-		puts "empty"
 		s
 	end
 
