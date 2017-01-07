@@ -2,7 +2,7 @@
 development:
   adapter: postgresql
   encoding: unicode
-  database: giftlist_development
+  database: db/giftlist_development
   pool: 5
   username: randy2
   password:
@@ -11,7 +11,7 @@ development:
   test:
   adapter: postgresql
   encoding: unicode
-  database: giftlist_test
+  database: db/giftlist_test
   pool: 5
   username: randy2
   password:

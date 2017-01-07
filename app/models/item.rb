@@ -1,6 +1,4 @@
 class Item < ApplicationRecord
-	belongs_to :user
-	has_many :purchases
 
 	def userList(user_id=nil, item_id=nil)
 		if user_id
