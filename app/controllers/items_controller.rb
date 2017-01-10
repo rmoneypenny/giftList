@@ -29,7 +29,11 @@ class ItemsController < ApplicationController
 	def destroy
 		Item.update(params[:item_id], :deleted => true)
 		#check if purchases exist, do the below if so, delete the item if not
-		Purchase.where(:item_id => params[:item_id]).update_all(:deleted => true)
+		if Purchase.exists?(:item_id => params[:item_id])
+			Purchase.where(:item_id => params[:item_id]).update_all(:deleted => true)
+		else
+			Item.find(params[:item_id]).destroy
+		end
 		redirect_to mylist_path
 	end
 

@@ -1,7 +1,10 @@
+
+
 <br>
+<%= form_tag(mypurchases_path, method: "delete") do %>
+
 <% if !@purchases.first.blank? %>
 
-<%= form_tag(mypurchases_path, method: "delete") do %>
 <table>
 	<th> </th>
 	<th> Name </th>
@@ -28,8 +31,11 @@
 		</tr>
 	<% end %>
 </table>
+<%= submit_tag "Delete", data: {confirm: "Are you sure?"} %>
+<% end %>
 <br>
 <br>
+
 <% if !@deleted.first.blank? %>
 	<%=  %>
 	<%= "These are items that you have purchased but have since been deleted by the owner" %>
@@ -49,7 +55,9 @@
 
 	</table>
 <br>
-<% end %>
 <%= submit_tag "Delete", data: {confirm: "Are you sure?"} %>
 <% end %>
+
+
 <% end %>
+

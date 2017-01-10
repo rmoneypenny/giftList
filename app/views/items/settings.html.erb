@@ -1,2 +1,8 @@
-
+<br>
 Delete User
+<%= form_tag(settings_path, method: "delete") do %>
+	<%= label_tag "Password" %>
+	<%= text_field_tag :password %>
+	<%= submit_tag "Delete" %>
+<% end %>
+
