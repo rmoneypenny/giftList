@@ -20,9 +20,11 @@ class UsersController < ApplicationController
 
   def destroy
     if User.authenticate(User.find(current_user.id).email, params[:password])
-      #make a method in User.rb called cleanup that will mark all items w/current_user.id as deleted. Compare item_id w/Purchases and delete accordingly
+      User.cleanup(current_user.id)
+      redirect_to log_out_path
+    else
+      redirect_to settings_path
     end
-    redirect_to settings_path
   end
 
 

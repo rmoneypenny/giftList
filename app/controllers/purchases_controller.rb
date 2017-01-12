@@ -13,11 +13,20 @@ class PurchasesController < ApplicationController
 	end
 
 	def destroy
-		p = Purchase.where(:id => params[:purchase]).first
-		item = Item.where(:id => p.item_id).first
-		p.destroy
-		if item.deleted
-			item.destroy
+		
+		myPurchase = Purchase.where(:id => params[:purchase]).first
+		puts myPurchase.item_id
+		allPurchases = Purchase.where(:item_id => myPurchase.item_id)
+		puts allPurchases.count
+
+		if allPurchases.count == 1
+			myPurchase.destroy
+			item = Item.where(:id => myPurchase.item_id).first
+			if item.deleted
+				item.destroy
+			end
+		else
+			myPurchase.destroy
 		end
 		redirect_to mypurchases_path
 	end

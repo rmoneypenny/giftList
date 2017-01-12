@@ -47,7 +47,11 @@
 			<% @deleted.each do |d| %>
 				<tr>
 					<td> <%= radio_button_tag "purchase", d.id %> </td>
-					<td> <%= (User.where(:id => (Item.where(:id => d.item_id).first).user_id).first).name %> </td>
+					<% if (User.where(:id => (Item.where(:id => d.item_id).first).user_id).first).blank? %>
+						<td> Name Deleted </td>
+					<% else %>
+						<td> <%= (User.where(:id => (Item.where(:id => d.item_id).first).user_id).first).name %> </td>
+					<% end %>
 					<td> <%= (Item.where(:id => d.item_id).first).item_name %> </td>
 					<td> <%= number_to_currency(d.amount) %></td>
 				<tr>
