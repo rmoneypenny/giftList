@@ -13,7 +13,7 @@ class UsersController < ApplicationController
   		redirect_to log_in_path
   	else
   		flash[:alert] = "Account not created"
-  		render "new"
+  		redirect_to new_user_path
   	end
 
   end

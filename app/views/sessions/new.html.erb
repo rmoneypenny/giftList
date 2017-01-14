@@ -3,6 +3,8 @@
 	<div id = "error"> <%= flash[:alert] %> </div>
 <% elsif flash[:logout] %>
 	<div id = "message"> <%= flash[:logout] %> </div>
+<% elsif flash[:notice] %>
+	<div id = "message"> <%= flash[:notice] %> </div>
 <% end %>
 
 

@@ -8,11 +8,9 @@ class SessionsController < ApplicationController
 
 		if @user
 			session[:user_id] = @user.id
-			puts "success"
 			redirect_to mylist_path
 		else
 			flash[:alert] = "Unable to log in"
-			puts "fail"
 			redirect_to log_in_path
 		end
 	end

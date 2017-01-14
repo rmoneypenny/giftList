@@ -2,6 +2,10 @@ class User < ActiveRecord::Base
 
  attr_accessor :password
  validates_confirmation_of :password
+ validates :email, :email_format => {:message => 'is not looking good'}
+ validates :password, presence: true
+ validates :name, presence: true
+ validates_uniqueness_of :email
  before_save :encrypt_password
 
  def encrypt_password
