@@ -7,6 +7,11 @@ class User < ActiveRecord::Base
  validates :name, presence: true
  validates_uniqueness_of :email
  before_save :encrypt_password
+ before_save :downcase_email
+
+ def downcase_email
+ 	self.email.downcase!
+ end
 
  def encrypt_password
   self.password_salt = BCrypt::Engine.generate_salt
