@@ -28,13 +28,13 @@ class UsersController < ApplicationController
   end
 
   def update
-    if User.authenticate(User.find(current_user.id).email, params[:current_password])    
+    if User.authenticate(User.find(current_user.id).email, params[:current_password]) && params[:new_password] != ""  
       user = User.find(current_user.id)
       user.password = params[:new_password]
       user.save
       flash[:notice] = "Password Updated"
     else
-      flash[:error] = "Incorrect Password"
+      params[:new_password] == "" ? flash[:error] = "New password cannot be blank" : flash[:error] = "Incorrect Password"
     end
       #puts params[:current_password]
       #puts params[:new_password]
