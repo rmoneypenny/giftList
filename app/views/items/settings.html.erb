@@ -1,8 +1,28 @@
 <br>
-Delete Account
+<% if flash[:notice] %>
+	<div id = "message"> <%= flash[:notice] %> </div>
+<% elsif flash[:error] %>
+	<div id = "error"> <%= flash[:error] %> </div>
+<% end %>
+
+<b> Change Password </b>
+<br>
+<%= form_tag(settings_path, method: "post") do %>
+	<%= label_tag "Current Password" %>
+	<%= text_field_tag :current_password %>
+	<br>
+	<%= label_tag "New Password" %>
+	<%= text_field_tag :new_password %>
+	<br>
+	<%= submit_tag "Update" %>
+<% end %>
+<br>
+<br>
+<br>
+<b> Delete Account </b>
 <%= form_tag(settings_path, method: "delete") do %>
 	<%= label_tag "Password" %>
 	<%= text_field_tag :password %>
-	<%= submit_tag "Delete" %>
+	<%= submit_tag "Delete", data: {confirm: "Are you sure you want to delete your account?"} %>
 <% end %>
 

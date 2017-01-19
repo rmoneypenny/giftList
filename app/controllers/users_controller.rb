@@ -27,6 +27,19 @@ class UsersController < ApplicationController
     end
   end
 
+  def update
+    if User.authenticate(User.find(current_user.id).email, params[:current_password])    
+      user = User.find(current_user.id)
+      user.password = params[:new_password]
+      user.save
+      flash[:notice] = "Password Updated"
+    else
+      flash[:error] = "Incorrect Password"
+    end
+      #puts params[:current_password]
+      #puts params[:new_password]
+    redirect_to settings_path
+  end
 
 private 
 

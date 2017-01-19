@@ -2,7 +2,7 @@ class User < ActiveRecord::Base
 
  attr_accessor :password
  validates_confirmation_of :password
- validates :email, :email_format => {:message => 'is not looking good'}
+ validates :email, :email_format => {:message => 'nope'}
  validates :password, presence: true
  validates :name, presence: true
  validates_uniqueness_of :email
@@ -19,11 +19,13 @@ class User < ActiveRecord::Base
  end
 
  def self.authenticate(email, password)
+ 	email.downcase!
  	user = User.where(email: email).first
  	if user && user.password_hash == BCrypt::Engine.hash_secret(password, user.password_salt)
  		user
  	end
  end
+
 
 def self.cleanup(user_id)
 	#pull all of the user's items then mark for deletion

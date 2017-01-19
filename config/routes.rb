@@ -17,6 +17,7 @@ get "/purchases" => "items#purchases"
 post "/purchases" => "items#purchases"
 get "/mypurchases" => "items#mypurchases"
 get "/settings" => "items#settings"
+post "/settings" => "users#update"
 delete "/settings" => "users#destroy"
 
 post "/mypurchases" => "purchases#create"

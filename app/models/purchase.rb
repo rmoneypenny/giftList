@@ -1,6 +1,5 @@
 class Purchase < ApplicationRecord
 
-	belongs_to :item
 
 	def status(item_id)
 		if Purchase.exists?(:item_id => item_id)
